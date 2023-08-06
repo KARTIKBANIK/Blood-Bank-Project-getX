@@ -12,8 +12,7 @@ class IntroductionScreenView extends GetView<IntroductionScreenController> {
     final List<PageViewModel> pages = [
       PageViewModel(
         title: 'Connect With Everyone',
-        body:
-            'Here you can have whatever description you would like to have, you can type it all in here',
+        body: 'You can reach donar over this app. And find your blood',
         // footer: SizedBox(
         //   height: 45,
         //   width: 300,
@@ -30,8 +29,7 @@ class IntroductionScreenView extends GetView<IntroductionScreenController> {
       ),
       PageViewModel(
         title: 'Have Access Everywhere!',
-        body:
-            'Here you can have whatever description you would like to have, you can type it all in here',
+        body: 'You can access it all over Bangladesh',
         // footer: SizedBox(
         //   height: 45,
         //   width: 300,
@@ -48,8 +46,7 @@ class IntroductionScreenView extends GetView<IntroductionScreenController> {
       ),
       PageViewModel(
         title: 'Here We Start!',
-        body:
-            'Here you can have whatever description you would like to have, you can type it all in here',
+        body: 'Give Blood Safe Life. We are always support & help you',
         // footer: SizedBox(
         //   height: 45,
         //   width: 300,

@@ -10,6 +10,8 @@ abstract class Routes {
   static const INTRODUCTION_SCREEN = _Paths.INTRODUCTION_SCREEN;
   static const CUSTOM_SLIDE = _Paths.CUSTOM_SLIDE;
   static const SLIDER = _Paths.SLIDER;
+  static const SERVICE_UI = _Paths.SERVICE_UI;
+  static const BTMNAVBAR = _Paths.BTMNAVBAR;
 }
 
 abstract class _Paths {
@@ -21,4 +23,6 @@ abstract class _Paths {
   static const INTRODUCTION_SCREEN = '/introduction-screen';
   static const CUSTOM_SLIDE = '/custom-slide';
   static const SLIDER = '/slider';
+  static const SERVICE_UI = '/service-ui';
+  static const BTMNAVBAR = '/btmnavbar';
 }

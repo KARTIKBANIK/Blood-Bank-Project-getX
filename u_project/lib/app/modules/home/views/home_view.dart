@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
+import 'package:u_project/app/modules/service_ui/views/service_ui_view.dart';
 import 'package:u_project/app/modules/slider/views/slider_view.dart';
 import 'package:u_project/widgets/custom_text.dart';
-
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -32,10 +31,61 @@ class HomeView extends GetView<HomeController> {
           ),
           Expanded(
             flex: 4,
-            child: Placeholder(),
+            child: ServiceUiView(),
           ),
         ],
       ),
+
+      /* FLOATING ACTION BUTTON */
+
+      // floatingActionButton: FloatingActionButton.extended(
+      //   backgroundColor: Colors.redAccent,
+      //   onPressed: () {},
+      //   label: Custom_TExt(
+      //     txt: "REQUEST",
+      //     textColor: Colors.black,
+      //     fw: FontWeight.w500,
+      //   ),
+      // ),
+
+      /* BOTTOM NAVIGATION BAR */
+
+      // bottomNavigationBar: BottomNavigationBar(
+      //   backgroundColor: Colors.white,
+      //   selectedFontSize: 10,
+      //   selectedIconTheme: IconThemeData(color: Colors.amberAccent, size: 40),
+      //   showSelectedLabels: false,
+      //   showUnselectedLabels: false,
+      //   selectedItemColor: Colors.amberAccent,
+      //   selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+      //   unselectedIconTheme: IconThemeData(
+      //     color: Colors.redAccent,
+      //   ),
+      //   unselectedItemColor: Colors.blueAccent,
+      //   items: const <BottomNavigationBarItem>[
+      //     BottomNavigationBarItem(
+      //       icon: Icon(
+      //         Icons.call,
+      //         size: 20,
+      //       ),
+      //       label: 'Calls',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(
+      //         Icons.camera,
+      //         size: 20,
+      //       ),
+      //       label: 'Camera',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(
+      //         Icons.chat,
+      //         size: 20,
+      //       ),
+      //       label: 'Chats',
+      //     ),
+      //   ],
+      // ),
     );
   }
 }
