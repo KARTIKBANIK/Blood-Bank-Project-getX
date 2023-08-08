@@ -6,16 +6,23 @@ environment:
   sdk: '>=3.0.6 <4.0.0'
 
 dependencies: 
-  cupertino_icons: ^1.0.2
+  cupertino_icons: any
   google_fonts: any
-  introduction_screen: ^3.0.2
+  introduction_screen: any
   carousel_slider: any
-  shared_preferences: ^2.2.0
-  get: 4.6.5
+  shared_preferences: any
+  cloud_firestore: any
+  firebase_storage: any
+  firebase_auth: any
+  google_sign_in: any
+  uuid: any
+  url_launcher: any
+  geolocator: any
+  get: any
   flutter: 
     sdk: flutter
-  lottie: ^2.5.0
-  flutter_screenutil: ^5.8.4
+  lottie: any
+  flutter_screenutil: any
 
 dev_dependencies: 
   flutter_lints: 2.0.2

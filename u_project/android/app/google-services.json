@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "682162456352",
+    "project_id": "u-project-bd38a",
+    "storage_bucket": "u-project-bd38a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682162456352:android:fd85a8744847898c28f945",
+        "android_client_info": {
+          "package_name": "com.shisir.u_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682162456352-4lqk4475nesa3ip71bj49b3kugvovsqj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAUkCBbz4S2_KUASGPSqtrCHcnu-yH0f4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "682162456352-4lqk4475nesa3ip71bj49b3kugvovsqj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

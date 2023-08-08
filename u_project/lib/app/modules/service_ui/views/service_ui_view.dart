@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:u_project/widgets/custom_container.dart';
+import 'package:u_project/app/modules/service_ui/views/ambulance_view.dart';
+import 'package:u_project/app/modules/service_ui/views/blood_view.dart';
+import 'package:u_project/app/modules/service_ui/views/doctor_view.dart';
+import 'package:u_project/app/modules/service_ui/views/fire_station_view.dart';
+import 'package:u_project/app/modules/service_ui/views/police_view.dart';
 import 'package:u_project/widgets/custom_text.dart';
 
 import '../controllers/service_ui_controller.dart';
@@ -34,8 +38,12 @@ class ServiceUiView extends GetView<ServiceUiController> {
                     Column(
                       children: [
                         GestureDetector(
-                          onTap: () {},
-                          child: Container(
+                          onTap: () {
+                            Get.to(
+                              BloodView(),
+                            );
+                          },
+                          child: SizedBox(
                             height: 50,
                             width: 50,
                             child: Image.asset("assets/icons/blood.png",
@@ -54,13 +62,17 @@ class ServiceUiView extends GetView<ServiceUiController> {
                       ],
                     ),
                     SizedBox(
-                      width: 20.0,
+                      width: 30.0,
                     ),
                     Column(
                       children: [
                         GestureDetector(
-                          onTap: () {},
-                          child: Container(
+                          onTap: () {
+                            Get.to(
+                              AmbulanceView(),
+                            );
+                          },
+                          child: SizedBox(
                             height: 50,
                             width: 50,
                             child: Image.asset("assets/icons/ambulance.png",
@@ -79,13 +91,17 @@ class ServiceUiView extends GetView<ServiceUiController> {
                       ],
                     ),
                     SizedBox(
-                      width: 20.0,
+                      width: 30.0,
                     ),
                     Column(
                       children: [
                         GestureDetector(
-                          onTap: () {},
-                          child: Container(
+                          onTap: () {
+                            Get.to(
+                              DoctorView(),
+                            );
+                          },
+                          child: SizedBox(
                             height: 50,
                             width: 50,
                             child: Image.asset("assets/icons/doctor.png",
@@ -104,13 +120,17 @@ class ServiceUiView extends GetView<ServiceUiController> {
                       ],
                     ),
                     SizedBox(
-                      width: 20.0,
+                      width: 30.0,
                     ),
                     Column(
                       children: [
                         GestureDetector(
-                          onTap: () {},
-                          child: Container(
+                          onTap: () {
+                            Get.to(
+                              FireStationView(),
+                            );
+                          },
+                          child: SizedBox(
                             height: 50,
                             width: 50,
                             child: Image.asset("assets/icons/fire.png",
@@ -134,8 +154,12 @@ class ServiceUiView extends GetView<ServiceUiController> {
                     Column(
                       children: [
                         GestureDetector(
-                          onTap: () {},
-                          child: Container(
+                          onTap: () {
+                            Get.to(
+                              PoliceView(),
+                            );
+                          },
+                          child: SizedBox(
                             height: 50,
                             width: 50,
                             child: Image.asset("assets/icons/police.png",
