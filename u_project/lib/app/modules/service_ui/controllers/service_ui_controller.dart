@@ -4,6 +4,7 @@ class ServiceUiController extends GetxController {
   //TODO: Implement ServiceUiController
 
   final count = 0.obs;
+
   @override
   void onInit() {
     super.onInit();

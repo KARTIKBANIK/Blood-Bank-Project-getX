@@ -8,7 +8,9 @@ environment:
 dependencies: 
   cupertino_icons: any
   google_fonts: any
+  intl: any
   introduction_screen: any
+  flutter_datetime_picker: any
   carousel_slider: any
   shared_preferences: any
   cloud_firestore: any
