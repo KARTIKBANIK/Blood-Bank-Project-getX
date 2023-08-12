@@ -1,8 +1,13 @@
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:u_project/widgets/custom_text.dart';
 
 class ReceiveView extends StatefulWidget {
+  Query dbRef = FirebaseDatabase.instance.ref().child('Receive');
+  DatabaseReference reference =
+      FirebaseDatabase.instance.ref().child('Receive');
   @override
   State<ReceiveView> createState() => _ReceiveViewState();
 }
@@ -15,6 +20,14 @@ class _ReceiveViewState extends State<ReceiveView> {
   TextEditingController _dateController = TextEditingController();
   TextEditingController bloodGrpController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  TextEditingController detailsController = TextEditingController();
+  late DatabaseReference dbRef;
+
+  @override
+  void initState() {
+    super.initState();
+    dbRef = FirebaseDatabase.instance.ref().child('Receive');
+  }
 
   DateTime? _selectedDate;
   DateTime currentDate = DateTime.now();
@@ -95,9 +108,30 @@ class _ReceiveViewState extends State<ReceiveView> {
                     labelText: 'Location',
                   ),
                 ),
+                TextFormField(
+                  controller: detailsController,
+                  keyboardType: TextInputType.text,
+                  decoration: const InputDecoration(
+                    icon: Icon(Icons.info_outline),
+                    hintText: 'Write tell about pataints details',
+                    labelText: 'Deails',
+                  ),
+                ),
                 SizedBox(height: 20),
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    Map<String, String> Receive = {
+                      'name': nameController.text,
+                      'phone': phoneController.text,
+                      'dob': _dateController.text,
+                      'blood-group': bloodGrpController.text,
+                      'location': addressController.text,
+                      'detils': detailsController.text,
+                    };
+
+                    dbRef.push().set(Receive);
+                    navigator!.pop();
+                  },
                   icon: Icon(Icons.post_add_rounded),
                   label: Text("Submit"),
                 ),
@@ -105,6 +139,88 @@ class _ReceiveViewState extends State<ReceiveView> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget listItem({required Map donor}) {
+    return Container(
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
+      height: 110,
+      color: Colors.amberAccent,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            donor['name'],
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Text(
+            donor['blood-group'],
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Text(
+            donor['dob'],
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Text(
+            donor['phone'],
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  /* Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => UpdateRecord(
+                        donorKey: donor['key'],
+                      ),
+                    ),
+                  );*/
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.edit,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                width: 6,
+              ),
+              GestureDetector(
+                onTap: () {
+                  // reference.child(donor['key']).remove();
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.delete,
+                      color: Colors.red[700],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
@@ -121,7 +237,21 @@ class _ReceiveViewState extends State<ReceiveView> {
           fw: FontWeight.bold,
         ),
       ),
-      body: Padding(
+      body: Container(
+        height: double.infinity,
+        child: FirebaseAnimatedList(
+          query: dbRef,
+          itemBuilder: (BuildContext context, DataSnapshot snapshot,
+              Animation<double> animation, int index) {
+            Map donor = snapshot.value as Map;
+            donor['key'] = snapshot.key;
+
+            return listItem(donor: donor);
+          },
+        ),
+      ),
+
+      /*Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,7 +270,7 @@ class _ReceiveViewState extends State<ReceiveView> {
                 child: ListView(
                   children: [
                     Container(
-                      height: MediaQuery.of(context).size.height / 5,
+                      height: MediaQuery.of(context).size.height / 5.5,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -170,17 +300,21 @@ class _ReceiveViewState extends State<ReceiveView> {
                         ),
                         ButtonBar(
                           children: <Widget>[
-                            TextButton(
-                              child: Text('ACTION 1'),
-                              onPressed: () {
-                                // Perform action 1
-                              },
+                            ElevatedButton.icon(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.green, // Background color
+                              ),
+                              icon: Icon(Icons.call),
+                              label: Text("Call"),
                             ),
-                            TextButton(
-                              child: Text('ACTION 2'),
-                              onPressed: () {
-                                // Perform action 2
-                              },
+                            ElevatedButton.icon(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.blueGrey, // Background color
+                              ),
+                              icon: Icon(Icons.info),
+                              label: Text("Details"),
                             ),
                           ],
                         ),
@@ -196,7 +330,7 @@ class _ReceiveViewState extends State<ReceiveView> {
             ),
           ],
         ),
-      ),
+      ),*/
     );
   }
 }

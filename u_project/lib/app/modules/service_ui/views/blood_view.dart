@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:u_project/app/modules/service_ui/views/donate_tab_bar_view.dart';
 import 'package:u_project/app/modules/service_ui/views/receive_tab_bar_view.dart';
-import 'package:u_project/widgets/custom_container.dart';
 import 'package:u_project/widgets/custom_text.dart';
 
 class BloodView extends GetView {

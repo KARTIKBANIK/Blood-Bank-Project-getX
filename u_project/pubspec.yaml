@@ -6,6 +6,8 @@ environment:
   sdk: '>=3.0.6 <4.0.0'
 
 dependencies: 
+  firebase_core: any
+  firebase_database: any
   cupertino_icons: any
   google_fonts: any
   intl: any
