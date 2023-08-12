@@ -143,42 +143,107 @@ class _ReceiveViewState extends State<ReceiveView> {
     );
   }
 
-  Widget listItem({required Map donor}) {
+  Widget listItem({required Map receive}) {
     return Container(
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(10),
-      height: 110,
-      color: Colors.amberAccent,
+      height: MediaQuery.of(context).size.height / 5,
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 228, 236, 243),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          width: .1,
+          color: Colors.black,
+        ),
+      ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            donor['name'],
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+          Container(
+            child: ListTile(
+              trailing: CircleAvatar(
+                radius: 26,
+                backgroundColor: Colors.grey,
+                child: CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Colors.white,
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.call),
+                  ),
+                ),
+              ),
+              leading: CircleAvatar(
+                radius: 26,
+                backgroundColor: Colors.grey,
+                child: CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Colors.white,
+                  child: Text(
+                    receive['blood-group'],
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    receive['name'],
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "Contact: ${receive['phone']}",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  Text(
+                    "Address : ${receive['location']}",
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.blueGrey,
+                    ),
+                  ),
+                  Text(
+                    "Details: ${receive['detils']}",
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.blueGrey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-          const SizedBox(
-            height: 5,
-          ),
-          Text(
-            donor['blood-group'],
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Text(
-            donor['dob'],
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Text(
-            donor['phone'],
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+          SizedBox(
+            height: 10,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton.icon(
+                onPressed: () {},
+                icon: Icon(Icons.update),
+                label: Text("Update"),
+              ),
+              ElevatedButton.icon(
+                onPressed: () {},
+                icon: Icon(Icons.delete_forever),
+                label: Text("Delete"),
+              ),
+            ],
+          )
+
+          /*   Row(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -220,6 +285,8 @@ class _ReceiveViewState extends State<ReceiveView> {
               ),
             ],
           )
+      
+      */
         ],
       ),
     );
@@ -243,94 +310,13 @@ class _ReceiveViewState extends State<ReceiveView> {
           query: dbRef,
           itemBuilder: (BuildContext context, DataSnapshot snapshot,
               Animation<double> animation, int index) {
-            Map donor = snapshot.value as Map;
-            donor['key'] = snapshot.key;
+            Map receive = snapshot.value as Map;
+            receive['key'] = snapshot.key;
 
-            return listItem(donor: donor);
+            return listItem(receive: receive);
           },
         ),
       ),
-
-      /*Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              flex: 1,
-              child: Custom_TExt(
-                txt: "Request For Blood",
-                fs: 23,
-                fw: FontWeight.bold,
-              ),
-            ),
-            Expanded(
-              flex: 10,
-              child: Container(
-                child: ListView(
-                  children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height / 5.5,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          width: 1,
-                          color: Colors.grey,
-                        ),
-                      ),
-                      child: Column(children: [
-                        ListTile(
-                          leading: CircleAvatar(
-                            radius: 26,
-                            backgroundColor: Colors.black,
-                            child: CircleAvatar(
-                              radius: 25,
-                              backgroundColor: Colors.white,
-                              child: Custom_TExt(
-                                txt: "A+",
-                                textColor: Colors.red,
-                                fs: 18,
-                                fw: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          title: Text('Card Title'),
-                          subtitle: Text('Card Subtitle'),
-                        ),
-                        ButtonBar(
-                          children: <Widget>[
-                            ElevatedButton.icon(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.green, // Background color
-                              ),
-                              icon: Icon(Icons.call),
-                              label: Text("Call"),
-                            ),
-                            ElevatedButton.icon(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.blueGrey, // Background color
-                              ),
-                              icon: Icon(Icons.info),
-                              label: Text("Details"),
-                            ),
-                          ],
-                        ),
-                      ]),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Container(),
-            ),
-          ],
-        ),
-      ),*/
     );
   }
 }
