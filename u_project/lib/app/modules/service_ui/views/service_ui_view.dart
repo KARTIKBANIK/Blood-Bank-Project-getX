@@ -5,7 +5,6 @@ import 'package:u_project/app/modules/service_ui/views/ambulance_view.dart';
 import 'package:u_project/app/modules/service_ui/views/blood_view.dart';
 import 'package:u_project/app/modules/service_ui/views/doctor_view.dart';
 import 'package:u_project/app/modules/service_ui/views/fire_station_view.dart';
-import 'package:u_project/app/modules/service_ui/views/police_view.dart';
 import 'package:u_project/widgets/custom_text.dart';
 
 import '../controllers/service_ui_controller.dart';
@@ -142,35 +141,6 @@ class ServiceUiView extends GetView<ServiceUiController> {
                         ),
                         Custom_TExt(
                           txt: "Fire Service",
-                          fs: 18,
-                          fw: FontWeight.bold,
-                          textColor: Colors.black,
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 30.0,
-                    ),
-                    Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Get.to(
-                              PoliceView(),
-                            );
-                          },
-                          child: SizedBox(
-                            height: 50,
-                            width: 50,
-                            child: Image.asset("assets/icons/police.png",
-                                fit: BoxFit.cover),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Custom_TExt(
-                          txt: "Police",
                           fs: 18,
                           fw: FontWeight.bold,
                           textColor: Colors.black,

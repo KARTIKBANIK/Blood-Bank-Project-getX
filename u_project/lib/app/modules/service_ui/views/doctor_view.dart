@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DoctorView extends GetView {
-  const DoctorView({Key? key}) : super(key: key);
+  DoctorView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var name = [
@@ -104,7 +106,9 @@ class DoctorView extends GetView {
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           trailing: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                _launchPhoneCall();
+                              },
                               icon: Icon(
                                 Icons.call,
                                 color: Colors.lightGreen,
@@ -120,5 +124,15 @@ class DoctorView extends GetView {
         ),
       ),
     );
+  }
+
+  void _launchPhoneCall() async {
+    const phoneNumber =
+        'tel:+88 01862131295'; // Replace with the desired phone number
+    if (await canLaunch(phoneNumber)) {
+      await launch(phoneNumber);
+    } else {
+      throw 'Could not launch phone call';
+    }
   }
 }

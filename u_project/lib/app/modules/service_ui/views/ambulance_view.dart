@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:u_project/widgets/custom_text.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AmbulanceView extends GetView {
   const AmbulanceView({Key? key}) : super(key: key);
@@ -82,7 +83,9 @@ class AmbulanceView extends GetView {
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           trailing: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                _launchPhoneCall();
+                              },
                               icon: Icon(
                                 Icons.call,
                                 color: Colors.lightGreen,
@@ -98,5 +101,15 @@ class AmbulanceView extends GetView {
         ),
       ),
     );
+  }
+
+  void _launchPhoneCall() async {
+    const phoneNumber =
+        'tel:+88 01862131295'; // Replace with the desired phone number
+    if (await canLaunch(phoneNumber)) {
+      await launch(phoneNumber);
+    } else {
+      throw 'Could not launch phone call';
+    }
   }
 }
