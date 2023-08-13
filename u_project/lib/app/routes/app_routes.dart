@@ -12,6 +12,8 @@ abstract class Routes {
   static const SLIDER = _Paths.SLIDER;
   static const SERVICE_UI = _Paths.SERVICE_UI;
   static const BTMNAVBAR = _Paths.BTMNAVBAR;
+  static const DRAWER_PAGE = _Paths.DRAWER_PAGE;
+  static const SEARCH = _Paths.SEARCH;
 }
 
 abstract class _Paths {
@@ -25,4 +27,6 @@ abstract class _Paths {
   static const SLIDER = '/slider';
   static const SERVICE_UI = '/service-ui';
   static const BTMNAVBAR = '/btmnavbar';
+  static const DRAWER_PAGE = '/drawer-page';
+  static const SEARCH = '/search';
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:u_project/app/modules/drawer_page/views/drawer_page_view.dart';
+import 'package:u_project/app/modules/search/views/search_view.dart';
 import 'package:u_project/app/modules/service_ui/views/service_ui_view.dart';
 import 'package:u_project/app/modules/slider/views/slider_view.dart';
 import 'package:u_project/widgets/custom_text.dart';
@@ -10,7 +12,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(),
+      drawer: DrawerPageView(),
       appBar: AppBar(
         iconTheme: const IconThemeData(
           color: Colors.black,
@@ -22,8 +24,18 @@ class HomeView extends GetView<HomeController> {
           fs: 25,
           fw: FontWeight.bold,
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.to(
+                SearchScrrren(),
+              );
+            },
+            icon: Icon(Icons.search),
+          ),
+        ],
       ),
-      body: const Column(
+      body: Column(
         children: [
           Expanded(
             flex: 2,

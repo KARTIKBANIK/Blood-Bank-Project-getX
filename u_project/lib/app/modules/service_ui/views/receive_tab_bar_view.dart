@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:u_project/widgets/custom_text.dart';
 
 class ReceiveView extends StatefulWidget {
-  Query dbRef = FirebaseDatabase.instance.ref().child('Receive');
+  DatabaseReference dbRef = FirebaseDatabase.instance.ref().child('Receive');
   DatabaseReference reference =
       FirebaseDatabase.instance.ref().child('Receive');
   @override
@@ -131,6 +132,11 @@ class _ReceiveViewState extends State<ReceiveView> {
 
                     dbRef.push().set(Receive);
                     navigator!.pop();
+
+                    //Add the data tothe database....
+                    FirebaseFirestore.instance
+                        .collection("receive_list")
+                        .add(Receive);
                   },
                   icon: Icon(Icons.post_add_rounded),
                   label: Text("Submit"),
