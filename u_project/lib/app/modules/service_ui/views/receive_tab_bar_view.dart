@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ class _ReceiveViewState extends State<ReceiveView> {
     dbRef = FirebaseDatabase.instance.ref().child('Receive');
   }
 
+//DOB Date..
   DateTime? _selectedDate;
   DateTime currentDate = DateTime.now();
   Future<void> _selectDate(BuildContext context) async {
@@ -163,7 +165,7 @@ class _ReceiveViewState extends State<ReceiveView> {
           color: Colors.black,
         ),
       ),
-      child: Column(
+      child: ListView(
         children: [
           Container(
             child: ListTile(
@@ -240,7 +242,9 @@ class _ReceiveViewState extends State<ReceiveView> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  updateDocument();
+                },
                 icon: Icon(Icons.update),
                 label: Text("Update"),
               ),
@@ -292,5 +296,23 @@ class _ReceiveViewState extends State<ReceiveView> {
     } else {
       throw 'Could not launch phone call';
     }
+  }
+
+  void updateDocument() async {
+    await Firebase.initializeApp();
+
+    // Reference to the document you want to update
+    DocumentReference docRef =
+        FirebaseFirestore.instance.collection('receive_list').doc('documentId');
+
+    // Update a specific field
+    docRef.update({
+      'name': nameController.text,
+      'phone': phoneController.text,
+      'dob': _dateController.text,
+      'blood-group': bloodGrpController.text,
+      'location': addressController.text,
+      'detils': detailsController.text,
+    });
   }
 }

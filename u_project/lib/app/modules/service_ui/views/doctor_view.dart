@@ -7,6 +7,26 @@ import 'package:url_launcher/url_launcher.dart';
 class DoctorView extends GetView {
   DoctorView({Key? key}) : super(key: key);
 
+  void onCall(int index) async {
+    String phoneNumber = phone[index];
+    final url = 'tel:$phoneNumber';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  final List<String> phone = [
+    "+88 01862131292",
+    "+88 01761254478",
+    "+88 01811479654",
+    "+88 01362887924",
+    "+88 01925577789",
+    "+88 01854778952",
+    "+88 01745887933",
+    "+88 01862131295",
+  ];
   @override
   Widget build(BuildContext context) {
     var name = [
@@ -30,16 +50,7 @@ class DoctorView extends GetView {
       "Kydney Speacialist",
       "Medichine Speacialist",
     ];
-    var phone = [
-      "+88 01862131292",
-      "+88 01761254478",
-      "+88 01811479654",
-      "+88 01362887924",
-      "+88 01925577789",
-      "+88 01854778952",
-      "+88 01745887933",
-      "+88 01862131295",
-    ];
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent,
@@ -106,9 +117,7 @@ class DoctorView extends GetView {
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           trailing: IconButton(
-                              onPressed: () {
-                                _launchPhoneCall();
-                              },
+                              onPressed: () => onCall(index),
                               icon: Icon(
                                 Icons.call,
                                 color: Colors.lightGreen,
@@ -124,15 +133,5 @@ class DoctorView extends GetView {
         ),
       ),
     );
-  }
-
-  void _launchPhoneCall() async {
-    const phoneNumber =
-        'tel:+88 01862131295'; // Replace with the desired phone number
-    if (await canLaunch(phoneNumber)) {
-      await launch(phoneNumber);
-    } else {
-      throw 'Could not launch phone call';
-    }
   }
 }
