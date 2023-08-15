@@ -4,19 +4,21 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:u_project/app/modules/service_ui/views/firebase_/update_data.dart';
 import 'package:u_project/widgets/custom_text.dart';
 
 class ReceiveView extends StatefulWidget {
   DatabaseReference dbRef = FirebaseDatabase.instance.ref().child('Receive');
-  DatabaseReference reference =
-      FirebaseDatabase.instance.ref().child('Receive');
+
   @override
   State<ReceiveView> createState() => _ReceiveViewState();
 }
 
 class _ReceiveViewState extends State<ReceiveView> {
   // final _formKey = GlobalKey<FormState>();
+  DatabaseReference reference =
+      FirebaseDatabase.instance.ref().child("Receive");
 
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -247,7 +249,9 @@ class _ReceiveViewState extends State<ReceiveView> {
                 label: Text("Update"),
               ),
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  reference.child(receive["key"]).remove();
+                },
                 icon: Icon(Icons.delete_forever),
                 label: Text("Delete"),
               ),

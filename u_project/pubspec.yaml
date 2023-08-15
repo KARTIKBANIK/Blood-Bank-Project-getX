@@ -10,6 +10,7 @@ dependencies:
   firebase_database: any
   cupertino_icons: any
   google_fonts: any
+  fluttertoast: any
   intl: any
   introduction_screen: any
   flutter_datetime_picker: any
