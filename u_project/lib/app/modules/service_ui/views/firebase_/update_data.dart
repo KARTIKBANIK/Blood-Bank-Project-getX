@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:u_project/widgets/custom_text.dart';
 
 class Updateecord extends StatefulWidget {
@@ -134,6 +135,15 @@ class _UpdateecordState extends State<Updateecord> {
               SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: () {
+                  Fluttertoast.showToast(
+                    msg: "Successfully Updated",
+                    toastLength: Toast.LENGTH_LONG,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 3,
+                    backgroundColor: Colors.green,
+                    textColor: Colors.white,
+                    fontSize: 13,
+                  );
                   Map<String, String> Receive = {
                     'name': nameController.text,
                     'phone': phoneController.text,

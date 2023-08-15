@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:u_project/app/modules/service_ui/views/firebase_/update_data.dart';
 import 'package:u_project/widgets/custom_text.dart';
@@ -125,6 +126,15 @@ class _ReceiveViewState extends State<ReceiveView> {
                 SizedBox(height: 20),
                 ElevatedButton.icon(
                   onPressed: () {
+                    Fluttertoast.showToast(
+                      msg: "Post Successfully",
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 3,
+                      backgroundColor: Colors.green,
+                      textColor: Colors.white,
+                      fontSize: 13,
+                    );
                     Map<String, String> Receive = {
                       'name': nameController.text,
                       'phone': phoneController.text,
@@ -258,6 +268,15 @@ class _ReceiveViewState extends State<ReceiveView> {
                 ),
                 onPressed: () {
                   reference.child(receive["key"]).remove();
+                  Fluttertoast.showToast(
+                    msg: "Successfully Deleted",
+                    toastLength: Toast.LENGTH_LONG,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 3,
+                    backgroundColor: Colors.redAccent,
+                    textColor: Colors.white,
+                    fontSize: 13,
+                  );
                 },
                 icon: Icon(Icons.delete_forever),
                 label: Text("Delete"),
