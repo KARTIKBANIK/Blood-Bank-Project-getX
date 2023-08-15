@@ -27,30 +27,30 @@ class DoctorView extends GetView {
     "+88 01745887933",
     "+88 01862131295",
   ];
+  var name = [
+    "Dr. Partha Dev Roy",
+    "Dr. Pulak Nath Banik",
+    "Dr. Jahid Hasan",
+    "Dr. Musa Ibrahim",
+    "Dr. Anamul Hasib",
+    "Dr. Lucky Begum",
+    "Dr. Jillur Rahman",
+    "Dr. Sahbuddin Islam",
+  ];
+  var specialist = [
+    "Medichine Speacialist",
+    "Scin Speacialist",
+    "Gyney Speacialist",
+    "Kydney Speacialist",
+    "Heart Speacialist",
+    "Child Speacialist",
+    "Child Speacialist",
+    "Kydney Speacialist",
+    "Medichine Speacialist",
+  ];
+
   @override
   Widget build(BuildContext context) {
-    var name = [
-      "Dr. Partha Dev Roy",
-      "Dr. Pulak Nath Banik",
-      "Dr. Jahid Hasan",
-      "Dr. Musa Ibrahim",
-      "Dr. Anamul Hasib",
-      "Dr. Lucky Begum",
-      "Dr. Jillur Rahman",
-      "Dr. Sahbuddin Islam",
-    ];
-    var specialist = [
-      "Medichine Speacialist",
-      "Scin Speacialist",
-      "Gyney Speacialist",
-      "Kydney Speacialist",
-      "Heart Speacialist",
-      "Child Speacialist",
-      "Child Speacialist",
-      "Kydney Speacialist",
-      "Medichine Speacialist",
-    ];
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent,

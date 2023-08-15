@@ -6,29 +6,40 @@ import 'package:u_project/widgets/custom_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AmbulanceView extends GetView {
-  const AmbulanceView({Key? key}) : super(key: key);
+  void onCall(int index) async {
+    String phoneNumber = phone[index];
+    final url = 'tel:$phoneNumber';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  var name = [
+    "Rahim Halque",
+    "Tarikul Islam",
+    "Jahid Hasan",
+    "Monir Hossain",
+    "Mamun Islam",
+    "Rafique Sheikh",
+    "Jillur Rahman",
+    "Sahbuddin Islam",
+  ];
+  var phone = [
+    "+88 01862131292",
+    "+88 01761254478",
+    "+88 01811479654",
+    "+88 01362887924",
+    "+88 01925577789",
+    "+88 01854778952",
+    "+88 01745887933",
+    "+88 01862131295",
+  ];
+
+  AmbulanceView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var name = [
-      "Rahim Halque",
-      "Tarikul Islam",
-      "Jahid Hasan",
-      "Monir Hossain",
-      "Mamun Islam",
-      "Rafique Sheikh",
-      "Jillur Rahman",
-      "Sahbuddin Islam",
-    ];
-    var phone = [
-      "+88 01862131292",
-      "+88 01761254478",
-      "+88 01811479654",
-      "+88 01362887924",
-      "+88 01925577789",
-      "+88 01854778952",
-      "+88 01745887933",
-      "+88 01862131295",
-    ];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent,
@@ -84,7 +95,7 @@ class AmbulanceView extends GetView {
                           ),
                           trailing: IconButton(
                               onPressed: () {
-                                _launchPhoneCall();
+                                onCall(index);
                               },
                               icon: Icon(
                                 Icons.call,
@@ -101,15 +112,5 @@ class AmbulanceView extends GetView {
         ),
       ),
     );
-  }
-
-  void _launchPhoneCall() async {
-    const phoneNumber =
-        'tel:+88 01862131295'; // Replace with the desired phone number
-    if (await canLaunch(phoneNumber)) {
-      await launch(phoneNumber);
-    } else {
-      throw 'Could not launch phone call';
-    }
   }
 }

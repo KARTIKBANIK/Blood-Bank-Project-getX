@@ -4,8 +4,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:u_project/app/modules/service_ui/views/firebase_/update_data.dart';
 import 'package:u_project/widgets/custom_text.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ReceiveView extends StatefulWidget {
   DatabaseReference dbRef = FirebaseDatabase.instance.ref().child('Receive');
@@ -176,9 +176,7 @@ class _ReceiveViewState extends State<ReceiveView> {
                   radius: 25,
                   backgroundColor: Colors.white,
                   child: IconButton(
-                    onPressed: () {
-                      _launchPhoneCall();
-                    },
+                    onPressed: () {},
                     icon: Icon(Icons.call),
                   ),
                 ),
@@ -243,7 +241,7 @@ class _ReceiveViewState extends State<ReceiveView> {
             children: [
               ElevatedButton.icon(
                 onPressed: () {
-                  updateDocument();
+                  Get.to(Updateecord(receiveKey: receive["key"]));
                 },
                 icon: Icon(Icons.update),
                 label: Text("Update"),
@@ -286,16 +284,6 @@ class _ReceiveViewState extends State<ReceiveView> {
         ),
       ),
     );
-  }
-
-  void _launchPhoneCall() async {
-    const phoneNumber =
-        'tel:+88 01862131295'; // Replace with the desired phone number
-    if (await canLaunch(phoneNumber)) {
-      await launch(phoneNumber);
-    } else {
-      throw 'Could not launch phone call';
-    }
   }
 
   void updateDocument() async {
