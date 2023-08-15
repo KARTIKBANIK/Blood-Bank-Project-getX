@@ -1,6 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:u_project/widgets/custom_text.dart';
 
 class Updateecord extends StatefulWidget {
   const Updateecord({super.key, required this.receiveKey});
@@ -65,6 +65,11 @@ class _UpdateecordState extends State<Updateecord> {
         child: Form(
           child: ListView(
             children: <Widget>[
+              Custom_TExt(
+                txt: "Update Your Data",
+                fs: 25,
+                fw: FontWeight.bold,
+              ),
               TextFormField(
                 keyboardType: TextInputType.name,
                 controller: nameController,
@@ -141,7 +146,7 @@ class _UpdateecordState extends State<Updateecord> {
                   dbRef.child(widget.receiveKey).update(Receive);
                   Navigator.pop(context);
                 },
-                icon: Icon(Icons.post_add_rounded),
+                icon: Icon(Icons.update),
                 label: Text("Update"),
               ),
             ],

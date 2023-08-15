@@ -4,7 +4,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:u_project/app/modules/service_ui/views/firebase_/update_data.dart';
 import 'package:u_project/widgets/custom_text.dart';
 
@@ -16,7 +15,7 @@ class ReceiveView extends StatefulWidget {
 }
 
 class _ReceiveViewState extends State<ReceiveView> {
-  // final _formKey = GlobalKey<FormState>();
+  //delete  instance
   DatabaseReference reference =
       FirebaseDatabase.instance.ref().child("Receive");
 
@@ -242,6 +241,10 @@ class _ReceiveViewState extends State<ReceiveView> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  primary: Color.fromARGB(255, 94, 180,
+                      99), // Change this color to your desired color
+                ),
                 onPressed: () {
                   Get.to(Updateecord(receiveKey: receive["key"]));
                 },
@@ -249,6 +252,10 @@ class _ReceiveViewState extends State<ReceiveView> {
                 label: Text("Update"),
               ),
               ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  primary: Color.fromARGB(255, 247, 114,
+                      114), // Change this color to your desired color
+                ),
                 onPressed: () {
                   reference.child(receive["key"]).remove();
                 },
