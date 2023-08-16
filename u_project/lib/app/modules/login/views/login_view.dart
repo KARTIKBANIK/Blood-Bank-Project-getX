@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -15,7 +16,6 @@ class LoginView extends GetView<LoginController> {
     final formKey = GlobalKey<FormState>();
 
     return Scaffold(
-      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
         child: Column(
@@ -98,8 +98,26 @@ class LoginView extends GetView<LoginController> {
                             }
                           },
                           child: const Text('Submit'),
-                        )
+                        ),
                       ],
+                    ),
+                  ),
+                  Center(
+                    child: Text.rich(
+                      TextSpan(
+                        text: 'Dont have any acoount? ',
+                        children: <InlineSpan>[
+                          TextSpan(
+                            recognizer: new TapGestureRecognizer()
+                              ..onTap = () => Get.to(
+                                    SignupView(),
+                                  ),
+                            text: ' Sign Up',
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],
