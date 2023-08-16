@@ -4,7 +4,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:u_project/app/modules/service_ui/views/firebase_/update_data.dart';
 import 'package:u_project/widgets/custom_text.dart';
 
@@ -27,6 +29,8 @@ class _ReceiveViewState extends State<ReceiveView> {
   TextEditingController addressController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
   late DatabaseReference dbRef;
+  // final formKey = GlobalKey<FormState>();
+  // String name = '';
 
   @override
   void initState() {
@@ -36,7 +40,9 @@ class _ReceiveViewState extends State<ReceiveView> {
 
 //DOB Date..
   DateTime? _selectedDate;
-  DateTime currentDate = DateTime.now();
+  //DateTime currentDate = DateTime.now();
+  DateTime parsedDate = DateFormat('yyyy-MM-dd').parse('2023-08-16');
+
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -60,11 +66,20 @@ class _ReceiveViewState extends State<ReceiveView> {
         child: Padding(
           padding: const EdgeInsets.all(18.0),
           child: Form(
+            // key: formKey,
             child: ListView(
               children: <Widget>[
                 TextFormField(
                   keyboardType: TextInputType.name,
                   controller: nameController,
+                  // validator: (value) {
+                  //   if (value!.isEmpty ||
+                  //       !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)) {
+                  //     return "Please enter correct name";
+                  //   } else {
+                  //     return null;
+                  //   }
+                  // },
                   decoration: const InputDecoration(
                     icon: Icon(Icons.person),
                     hintText: 'Enter your name',
@@ -91,8 +106,8 @@ class _ReceiveViewState extends State<ReceiveView> {
                       icon: Icon(Icons.calendar_month),
                     ),
                     icon: const Icon(Icons.calendar_today),
-                    hintText: 'Enter your date of birth',
-                    labelText: 'Date of Birth',
+                    hintText: 'Enter Blood Donating Date',
+                    labelText: 'Blood Donating Date',
                   ),
                 ),
                 TextFormField(
@@ -138,7 +153,7 @@ class _ReceiveViewState extends State<ReceiveView> {
                     Map<String, String> Receive = {
                       'name': nameController.text,
                       'phone': phoneController.text,
-                      'dob': _dateController.text,
+                      'bdd': _dateController.text,
                       'blood-group': bloodGrpController.text,
                       'location': addressController.text,
                       'detils': detailsController.text,
@@ -217,6 +232,14 @@ class _ReceiveViewState extends State<ReceiveView> {
                   ),
                   SizedBox(
                     height: 5,
+                  ),
+                  Text(
+                    "Donate Date: ${receive['bdd']}",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.redAccent,
+                    ),
                   ),
                   Text(
                     "Contact: ${receive['phone']}",
@@ -327,7 +350,7 @@ class _ReceiveViewState extends State<ReceiveView> {
     docRef.update({
       'name': nameController.text,
       'phone': phoneController.text,
-      'dob': _dateController.text,
+      'bdd': _dateController.text,
       'blood-group': bloodGrpController.text,
       'location': addressController.text,
       'detils': detailsController.text,

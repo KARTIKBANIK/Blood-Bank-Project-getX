@@ -46,52 +46,8 @@ class BloodView extends GetView {
           children: [
             ReceiveView(),
             DonateTabBarView(),
-
-            // FetchData(),
           ],
         ),
-        /*  body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 30,
-                left: 15,
-                right: 15,
-              ),
-              child: Custom_Container__2(
-                onTap: () {},
-                h: MediaQuery.of(context).size.height / 3.5,
-                w: MediaQuery.of(context).size.width / 1,
-                img: "assets/images/blood_donor.png",
-                txt: "Donor",
-                textColor: Colors.black,
-                fs: 30,
-                fw: FontWeight.bold,
-                lspace: 1,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 30,
-                left: 15,
-                right: 15,
-              ),
-              child: Custom_Container__2(
-                onTap: () {},
-                h: MediaQuery.of(context).size.height / 3.5,
-                w: MediaQuery.of(context).size.width / 1,
-                img: "assets/images/blood_receiver.png",
-                txt: "Receiver",
-                textColor: Colors.black,
-                fs: 30,
-                fw: FontWeight.bold,
-                lspace: 1,
-              ),
-            ),
-          ],
-        ),
-       
-       */
       ),
     );
   }

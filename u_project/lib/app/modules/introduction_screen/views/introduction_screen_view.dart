@@ -13,10 +13,6 @@ class IntroductionScreenView extends GetView<IntroductionScreenController> {
       PageViewModel(
         title: 'Connect With Everyone',
         body: 'You can reach donar over this app. And find your blood',
-        // footer: SizedBox(
-        //   height: 45,
-        //   width: 300,
-        // ),
         image: Center(
           child: Lottie.asset("assets/animations/2.json"),
         ),
@@ -30,10 +26,6 @@ class IntroductionScreenView extends GetView<IntroductionScreenController> {
       PageViewModel(
         title: 'Have Access Everywhere!',
         body: 'You can access it all over Bangladesh',
-        // footer: SizedBox(
-        //   height: 45,
-        //   width: 300,
-        // ),
         image: Center(
           child: Lottie.asset("assets/animations/1.json"),
         ),
@@ -47,10 +39,6 @@ class IntroductionScreenView extends GetView<IntroductionScreenController> {
       PageViewModel(
         title: 'Here We Start!',
         body: 'Give Blood Safe Life. We are always support & help you',
-        // footer: SizedBox(
-        //   height: 45,
-        //   width: 300,
-        // ),
         image: Center(
           child: Lottie.asset("assets/animations/5.json"),
         ),

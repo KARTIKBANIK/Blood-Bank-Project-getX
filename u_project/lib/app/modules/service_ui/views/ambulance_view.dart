@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:u_project/widgets/custom_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AmbulanceView extends GetView {

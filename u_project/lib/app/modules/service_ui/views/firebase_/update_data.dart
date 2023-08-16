@@ -52,7 +52,7 @@ class _UpdateecordState extends State<Updateecord> {
 
     nameController.text = receive['name'];
     phoneController.text = receive['phone'];
-    _dateController.text = receive['dob'];
+    _dateController.text = receive['bdd'];
     bloodGrpController.text = receive["blood-group"];
     addressController.text = receive["location"];
     detailsController.text = receive["detils"];
@@ -100,8 +100,8 @@ class _UpdateecordState extends State<Updateecord> {
                     icon: Icon(Icons.calendar_month),
                   ),
                   icon: const Icon(Icons.calendar_today),
-                  hintText: 'Enter your date of birth',
-                  labelText: 'Date of Birth',
+                  hintText: 'Blood Donating Date',
+                  labelText: 'Blood Donating Date',
                 ),
               ),
               TextFormField(
@@ -147,7 +147,7 @@ class _UpdateecordState extends State<Updateecord> {
                   Map<String, String> Receive = {
                     'name': nameController.text,
                     'phone': phoneController.text,
-                    'dob': _dateController.text,
+                    'bdd': _dateController.text,
                     'blood-group': bloodGrpController.text,
                     'location': addressController.text,
                     'detils': detailsController.text,

@@ -161,6 +161,20 @@ class ServiceUiView extends GetView<ServiceUiController> {
                 ),
               ),
             ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 15,
+            ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(7),
+              child: Container(
+                height: MediaQuery.of(context).size.height / 5,
+                width: double.infinity,
+                child: Image.asset(
+                  "assets/images/banner.jpg",
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
           ],
         ),
       ),
