@@ -11,7 +11,9 @@ class DonateTabBarView extends GetView {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.redAccent,
         onPressed: () {
-          Get.to(LoginView());
+          Get.to(
+            LoginScreen(),
+          );
         },
         label: const Text("POST"),
       ),

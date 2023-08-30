@@ -117,11 +117,12 @@ class DoctorView extends GetView {
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           trailing: IconButton(
-                              onPressed: () => onCall(index),
-                              icon: Icon(
-                                Icons.call,
-                                color: Colors.lightGreen,
-                              )),
+                            onPressed: () => onCall(index),
+                            icon: Icon(
+                              Icons.call,
+                              color: Colors.lightGreen,
+                            ),
+                          ),
                         ),
                       ),
                     );

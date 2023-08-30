@@ -3,12 +3,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 // import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:u_project/app/modules/service_ui/views/firebase_/update_data.dart';
+import 'package:u_project/app/modules/signup/bindings/signup_binding.dart';
 import 'package:u_project/widgets/custom_text.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ReceiveView extends StatefulWidget {
   DatabaseReference dbRef = FirebaseDatabase.instance.ref().child('Receive');
@@ -19,8 +22,15 @@ class ReceiveView extends StatefulWidget {
 
 class _ReceiveViewState extends State<ReceiveView> {
   //delete  instance
+
+  late DatabaseReference dbRef;
   DatabaseReference reference =
       FirebaseDatabase.instance.ref().child("Receive");
+  @override
+  void initState() {
+    super.initState();
+    dbRef = FirebaseDatabase.instance.ref().child('Receive');
+  }
 
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -28,19 +38,12 @@ class _ReceiveViewState extends State<ReceiveView> {
   TextEditingController bloodGrpController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
-  late DatabaseReference dbRef;
-  // final formKey = GlobalKey<FormState>();
+
+  final formKey = GlobalKey<FormState>();
   // String name = '';
 
-  @override
-  void initState() {
-    super.initState();
-    dbRef = FirebaseDatabase.instance.ref().child('Receive');
-  }
-
-//DOB Date..
+//BLood Donating
   DateTime? _selectedDate;
-  //DateTime currentDate = DateTime.now();
   DateTime parsedDate = DateFormat('yyyy-MM-dd').parse('2023-08-16');
 
   Future<void> _selectDate(BuildContext context) async {
@@ -66,20 +69,21 @@ class _ReceiveViewState extends State<ReceiveView> {
         child: Padding(
           padding: const EdgeInsets.all(18.0),
           child: Form(
-            // key: formKey,
+            key: formKey,
             child: ListView(
               children: <Widget>[
                 TextFormField(
                   keyboardType: TextInputType.name,
                   controller: nameController,
-                  // validator: (value) {
-                  //   if (value!.isEmpty ||
-                  //       !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)) {
-                  //     return "Please enter correct name";
-                  //   } else {
-                  //     return null;
-                  //   }
-                  // },
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(
+                      RegExp(r"[a-zA-Z]+|\s"),
+                    )
+                  ],
+                  validator: (val) {
+                    if (!val!.isValidName) return 'Enter valid name';
+                    return null;
+                  },
                   decoration: const InputDecoration(
                     icon: Icon(Icons.person),
                     hintText: 'Enter your name',
@@ -89,6 +93,17 @@ class _ReceiveViewState extends State<ReceiveView> {
                 TextFormField(
                   controller: phoneController,
                   keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(
+                      RegExp(r"[0-9]"),
+                    )
+                  ],
+                  validator: (val) {
+                    if (!val!.isValidPhone) {
+                      return 'Enter valid phone';
+                    }
+                    return null;
+                  },
                   decoration: const InputDecoration(
                     icon: Icon(Icons.phone),
                     hintText: 'Enter a phone number',
@@ -162,7 +177,7 @@ class _ReceiveViewState extends State<ReceiveView> {
                     dbRef.push().set(Receive);
                     navigator!.pop();
 
-                    //Add the data tothe database....
+                    //Add the data to the database....
                     FirebaseFirestore.instance
                         .collection("receive_list")
                         .add(Receive);
@@ -202,9 +217,18 @@ class _ReceiveViewState extends State<ReceiveView> {
                   radius: 25,
                   backgroundColor: Colors.white,
                   child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.call),
-                  ),
+                      onPressed: () {
+                        _makePhoneCall() async {
+                          const phoneNumber =
+                              'tel:+1234567890'; // Replace with the desired phone number
+                          if (await canLaunch(phoneNumber)) {
+                            await launch(phoneNumber);
+                          } else {
+                            throw 'Could not launch $phoneNumber';
+                          }
+                        }
+                      },
+                      icon: Icon(Icons.phone)),
                 ),
               ),
               leading: CircleAvatar(

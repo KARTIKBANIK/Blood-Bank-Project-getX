@@ -47,57 +47,6 @@ class HomeView extends GetView<HomeController> {
           ),
         ],
       ),
-
-      /* FLOATING ACTION BUTTON */
-
-      // floatingActionButton: FloatingActionButton.extended(
-      //   backgroundColor: Colors.redAccent,
-      //   onPressed: () {},
-      //   label: Custom_TExt(
-      //     txt: "REQUEST",
-      //     textColor: Colors.black,
-      //     fw: FontWeight.w500,
-      //   ),
-      // ),
-
-      /* BOTTOM NAVIGATION BAR */
-
-      // bottomNavigationBar: BottomNavigationBar(
-      //   backgroundColor: Colors.white,
-      //   selectedFontSize: 10,
-      //   selectedIconTheme: IconThemeData(color: Colors.amberAccent, size: 40),
-      //   showSelectedLabels: false,
-      //   showUnselectedLabels: false,
-      //   selectedItemColor: Colors.amberAccent,
-      //   selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
-      //   unselectedIconTheme: IconThemeData(
-      //     color: Colors.redAccent,
-      //   ),
-      //   unselectedItemColor: Colors.blueAccent,
-      //   items: const <BottomNavigationBarItem>[
-      //     BottomNavigationBarItem(
-      //       icon: Icon(
-      //         Icons.call,
-      //         size: 20,
-      //       ),
-      //       label: 'Calls',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(
-      //         Icons.camera,
-      //         size: 20,
-      //       ),
-      //       label: 'Camera',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(
-      //         Icons.chat,
-      //         size: 20,
-      //       ),
-      //       label: 'Chats',
-      //     ),
-      //   ],
-      // ),
     );
   }
 }
