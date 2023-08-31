@@ -34,7 +34,8 @@ class _ReceiveViewState extends State<ReceiveView> {
 
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController _dateController = TextEditingController();
+  late TextEditingController _dateController =
+      TextEditingController(text: parsedDate.toString());
   TextEditingController bloodGrpController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
@@ -180,7 +181,15 @@ class _ReceiveViewState extends State<ReceiveView> {
                     //Add the data to the database....
                     FirebaseFirestore.instance
                         .collection("receive_list")
-                        .add(Receive);
+                        .add(Receive)
+                        .then((value) {
+                      nameController.clear();
+                      addressController.clear();
+                      _dateController.clear();
+                      phoneController.clear();
+                      bloodGrpController.clear();
+                      detailsController.clear();
+                    });
                   },
                   icon: Icon(Icons.post_add_rounded),
                   label: Text("Submit"),
@@ -208,87 +217,79 @@ class _ReceiveViewState extends State<ReceiveView> {
       ),
       child: ListView(
         children: [
-          Container(
-            child: ListTile(
-              trailing: CircleAvatar(
-                radius: 26,
-                backgroundColor: Colors.grey,
+          ListTile(
+            onTap: () {
+              print("helllooooooooooooooooooo");
+            },
+            trailing: CircleAvatar(
+              radius: 26,
+              backgroundColor: Colors.grey,
+              child: GestureDetector(
+                onTap: () {},
                 child: CircleAvatar(
                   radius: 25,
                   backgroundColor: Colors.white,
-                  child: IconButton(
-                      onPressed: () {
-                        _makePhoneCall() async {
-                          const phoneNumber =
-                              'tel:+1234567890'; // Replace with the desired phone number
-                          if (await canLaunch(phoneNumber)) {
-                            await launch(phoneNumber);
-                          } else {
-                            throw 'Could not launch $phoneNumber';
-                          }
-                        }
-                      },
-                      icon: Icon(Icons.phone)),
+                  child: Icon(Icons.call),
                 ),
               ),
-              leading: CircleAvatar(
-                radius: 26,
-                backgroundColor: Colors.grey,
-                child: CircleAvatar(
-                  radius: 25,
-                  backgroundColor: Colors.white,
-                  child: Text(
-                    receive['blood-group'],
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
+            ),
+            leading: CircleAvatar(
+              radius: 26,
+              backgroundColor: Colors.grey,
+              child: CircleAvatar(
+                radius: 25,
+                backgroundColor: Colors.white,
+                child: Text(
+                  receive['blood-group'],
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    receive['name'],
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+            ),
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  receive['name'],
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
-                  SizedBox(
-                    height: 5,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  "Donate Date: ${receive['bdd']}",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.redAccent,
                   ),
-                  Text(
-                    "Donate Date: ${receive['bdd']}",
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.redAccent,
-                    ),
+                ),
+                Text(
+                  "Contact: ${receive['phone']}",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey,
                   ),
-                  Text(
-                    "Contact: ${receive['phone']}",
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey,
-                    ),
+                ),
+                Text(
+                  "Address : ${receive['location']}",
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.blueGrey,
                   ),
-                  Text(
-                    "Address : ${receive['location']}",
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.blueGrey,
-                    ),
+                ),
+                Text(
+                  "Details: ${receive['detils']}",
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.blueGrey,
                   ),
-                  Text(
-                    "Details: ${receive['detils']}",
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.blueGrey,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           SizedBox(
@@ -355,8 +356,152 @@ class _ReceiveViewState extends State<ReceiveView> {
               Animation<double> animation, int index) {
             Map receive = snapshot.value as Map;
             receive['key'] = snapshot.key;
+            onCall(int index) async {
+              String phoneNumber = receive['phone'];
+              final url = 'tel:$phoneNumber';
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+                throw 'Could not launch $url';
+              }
+            }
 
-            return listItem(receive: receive);
+            return Container(
+              margin: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
+              height: MediaQuery.of(context).size.height / 5,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 228, 236, 243),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  width: .1,
+                  color: Colors.black,
+                ),
+              ),
+              child: ListView(
+                children: [
+                  ListTile(
+                    onTap: () {
+                      print("helllooooooooooooooooooo");
+                    },
+                    trailing: CircleAvatar(
+                      radius: 26,
+                      backgroundColor: Colors.grey,
+                      child: GestureDetector(
+                        onTap: () {
+                          onCall(index);
+                        },
+                        child: CircleAvatar(
+                          radius: 25,
+                          backgroundColor: Colors.white,
+                          child: Icon(Icons.call),
+                        ),
+                      ),
+                    ),
+                    leading: CircleAvatar(
+                      radius: 26,
+                      backgroundColor: Colors.grey,
+                      child: CircleAvatar(
+                        radius: 25,
+                        backgroundColor: Colors.white,
+                        child: Text(
+                          receive['blood-group'],
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          receive['name'],
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "Donate Date: ${receive['bdd']}",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.redAccent,
+                          ),
+                        ),
+                        Text(
+                          "Contact: ${receive['phone']}",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        Text(
+                          "Address : ${receive['location']}",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.blueGrey,
+                          ),
+                        ),
+                        Text(
+                          "Details: ${receive['detils']}",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.blueGrey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          primary: Color.fromARGB(255, 94, 180,
+                              99), // Change this color to your desired color
+                        ),
+                        onPressed: () {
+                          Get.to(Updateecord(receiveKey: receive["key"]));
+                        },
+                        icon: Icon(Icons.update),
+                        label: Text("Update"),
+                      ),
+                      ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          primary: Color.fromARGB(255, 247, 114,
+                              114), // Change this color to your desired color
+                        ),
+                        onPressed: () {
+                          reference.child(receive["key"]).remove();
+                          Fluttertoast.showToast(
+                            msg: "Successfully Deleted",
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 3,
+                            backgroundColor: Colors.redAccent,
+                            textColor: Colors.white,
+                            fontSize: 13,
+                          );
+                        },
+                        icon: Icon(Icons.delete_forever),
+                        label: Text("Delete"),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            );
+
+            // return listItem(receive: receive);
           },
         ),
       ),
